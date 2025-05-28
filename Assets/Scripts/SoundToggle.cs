@@ -23,6 +23,11 @@ public class SoundToggle : MonoBehaviour
         _toggle.onValueChanged.AddListener(ToggleSound);
     }
 
+    public void SetCurrentValue(float value)
+    {
+        _currentValue = VolumeConverter.ÑonvertValue(value);
+    }
+
     private void ToggleSound(bool isDisabled)
     {
 
