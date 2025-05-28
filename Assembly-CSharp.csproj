@@ -62,7 +62,6 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\VolumeRegulator.cs" />
     <Compile Include="Assets\Scripts\SoundToggle.cs" />
-    <Compile Include="Assets\Scripts\VolumeConverter.cs" />
     <Compile Include="Assets\Scripts\AudioButtonHandler.cs" />
   </ItemGroup>
   <ItemGroup>

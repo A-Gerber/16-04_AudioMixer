@@ -1,44 +1,38 @@
 using UnityEngine;
-using UnityEngine.Audio;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(Toggle))]
 public class SoundToggle : MonoBehaviour
 {
-    [SerializeField] private AudioMixerGroup _mixer;
-    [SerializeField] private string _exposedParameters;
-
     private Toggle _toggle;
 
-    private float _standardValue = 0f;
-    private float _minValueMixer = -80f;
-
-    private float _currentValue;
+    private float _valueMute = 0f;
+    private float _valueWithSound = 1f;
 
     private void Awake()
     {
-        _toggle = GetComponent<Toggle>();
+        _toggle = GetComponent<Toggle>(); 
+    }
 
-        _currentValue = _standardValue;
-
+    private void OnEnable()
+    {
         _toggle.onValueChanged.AddListener(ToggleSound);
     }
 
-    public void SetCurrentValue(float value)
+    private void OnDisable()
     {
-        _currentValue = VolumeConverter.ÑonvertValue(value);
+        _toggle.onValueChanged.RemoveListener(ToggleSound);
     }
 
     private void ToggleSound(bool isDisabled)
     {
-
         if (isDisabled)
         {
-            _mixer.audioMixer.SetFloat(_exposedParameters, _minValueMixer);
-
+            AudioListener.volume = _valueMute;
         }
         else
         {
-            _mixer.audioMixer.SetFloat(_exposedParameters, _currentValue);
+            AudioListener.volume = _valueWithSound;
         }
     }
 }
